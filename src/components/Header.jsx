@@ -4,12 +4,18 @@ export default function Header() {
   return (
    <header className='p-[15px] shadow-xl'>
     <div className='max-w-[1200px] mx-auto border border-red-500'>
-        <div>
-<img src='images/Swiggy-emblem.png' alt=''/>
+        <div className='w-[100px] border border-blue-500'>
+<img src="images/Swiggy-emblem.png" className='w-full' alt=''/>
  
         </div>
 
-Hello 
+
+        <div>
+
+                
+        </div>
+
+
 
 
     </div>
