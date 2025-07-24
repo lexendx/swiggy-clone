@@ -6,7 +6,7 @@ export default function Header() {
     <div className='max-w-[1200px] mx-auto border border-red-500'>
         <div>
 <img src='images/Swiggy-emblem.png' alt=''/>
-
+ 
         </div>
 
 Hello 
