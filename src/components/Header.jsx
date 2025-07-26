@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { RxCaretDown } from "react-icons/rx";
+import { CiSearch } from "react-icons/ci";
+import { CiDiscount1 } from "react-icons/ci";
 
 export default function Header() {
   const [toggle, setToggle] = useState(false);
@@ -9,6 +11,22 @@ export default function Header() {
   const hideSideMenu = () =>{
     setToggle(false)
   }
+  const iinks = [
+{
+icon:<CiSearch/>,
+name: "Search"
+},
+{
+  icons: <CiDiscount1/>,
+  name: "Offers"
+}
+{
+  icon: "",
+  name: "Help"
+}
+
+
+  ]
 
   return (
     <>
@@ -19,7 +37,9 @@ export default function Header() {
           visibility: toggle ? "visible" : "hidden",
         }}
       >
-        <div className='w-[400px] bg-white h-full absolute duration-[400ms]'
+        <div onClick={(e) => {
+          e.stopPropagation();
+        }} className='w-[500px] bg-white h-full absolute duration-[400ms]'
         style={{
           left: toggle ? '0%' : '-100%'
         }}
@@ -42,6 +62,22 @@ export default function Header() {
               className="font-bold inline text-[.9rem] text-[#fc8019] cursor-pointer"
             />
           </div>
+<nav className='flex list-none gap-10 border border-black ml-auto text-[18px] font-semibold'>
+  <li className='flex items-center gap-2'>
+    <CiSearch/>
+    Search</li>
+   <li  className='flex items-center gap-2'>
+    <CiDiscount1/>
+
+    Offers</li>
+    <li  className='flex items-center gap-2'>
+      
+      Help</li>
+     <li>Sign in</li>
+      <li>Cart</li>
+</nav>
+
+
         </div>
       </header>
     </>
