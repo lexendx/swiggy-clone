@@ -63,18 +63,23 @@ name: "Search"
             />
           </div>
 <nav className='flex list-none gap-10 border border-black ml-auto text-[18px] font-semibold'>
-  <li className='flex items-center gap-2'>
-    <CiSearch/>
-    Search</li>
-   <li  className='flex items-center gap-2'>
-    <CiDiscount1/>
+  {
+links.map(
+(link, index) =>{
 
-    Offers</li>
-    <li  className='flex items-center gap-2'>
-      
-      Help</li>
-     <li>Sign in</li>
-      <li>Cart</li>
+return <li className='flex items-center gap-2'>
+{link.icon}
+{link.name}
+</li>
+
+}
+
+
+)
+
+
+
+  }
 </nav>
 
 
