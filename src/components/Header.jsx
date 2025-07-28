@@ -18,11 +18,20 @@ name: "Search"
 },
 {
   icons: <CiDiscount1/>,
-  name: "Offers"
+  name: "Offers",
+  sup: "New"
 },
 {
   icon: "",
   name: "Help"
+},
+{
+  icon: "",
+  name: "Sign In"
+},
+{
+  icon: "",
+  name: "Cart"
 }
 
 
@@ -46,7 +55,7 @@ name: "Search"
         ></div>
       </div>
       <header className="p-[15px] shadow-xl">
-        <div className="max-w-[1200px] mx-auto border border-red-500 flex items-center">
+        <div className="max-w-[1200px] mx-auto  flex items-center">
           <div className="w-[100px]">
             <img src="images/Swiggy-emblem.png" className="w-full" alt="" />
           </div>
@@ -62,14 +71,15 @@ name: "Search"
               className="font-bold inline text-[.9rem] text-[#fc8019] cursor-pointer"
             />
           </div>
-<nav className='flex list-none gap-10 border border-black ml-auto text-[18px] font-semibold'>
+<nav className='flex list-none gap-10  ml-auto text-[18px] font-semibold'>
   {
 links.map(
 (link, index) =>{
 
-return <li key={index} className='flex hover:text-[#fc8019] items-center gap-2'>
+return <li key={index} className='cursor-pointer flex hover:text-[#fc8019] items-center gap-2'>
 {link.icon}
 {link.name}
+<sup>{link.sup}</sup>
 </li>
 
 }
