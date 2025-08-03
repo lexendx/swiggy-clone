@@ -2,29 +2,37 @@ import React, { useEffect, useState } from 'react';
 import { HiArrowSmRight, HiArrowSmLeft } from 'react-icons/hi';
 
 export default function CategorySection() {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategory] = useState([]);
 
   const fetchCategory = async () => {
     try {
       const swiggyApiUrl =
         'https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING';
 
-      // Using AllOrigins to bypass CORS
-      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(swiggyApiUrl)}`;
+      // Using alternative proxy (CORS bypass)
+      const proxyUrl = `https://thingproxy.freeboard.io/fetch/${swiggyApiUrl}`;
 
       const response = await fetch(proxyUrl);
-      const wrappedData = await response.json(); // JSON with a "contents" string
-      const data = JSON.parse(wrappedData.contents); // Parse actual Swiggy JSON
+      const data = await response.json();
 
-      // Find the category section
-      const cards = data?.data?.cards || [];
-      const categoryCard = cards.find(
-        (card) => card?.card?.card?.id === 'whats_on_your_mind'
+      console.log('Full Swiggy response:', data);
+
+      const allCards = data?.data?.cards;
+      console.log('All cards:', allCards);
+
+      const categoryCard = allCards?.find(
+        (card) =>
+          card?.card?.card?.id === 'whats_on_your_mind' ||
+          card?.card?.card?.title?.toLowerCase()?.includes("what's on your mind")
       );
 
-      if (categoryCard) {
-        const categoryData = categoryCard.card.card.gridElements.infoWithStyle.info;
-        setCategories(categoryData);
+      console.log('Category card found:', categoryCard);
+
+      const categoryData =
+        categoryCard?.card?.card?.gridElements?.infoWithStyle?.info;
+
+      if (categoryData) {
+        setCategory(categoryData);
         console.log('Categories:', categoryData);
       } else {
         console.warn('No category data found.');
@@ -42,9 +50,7 @@ export default function CategorySection() {
     <div className="max-w-[1200px] mx-auto px-4 py-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800" style={{ fontSize: '24px' }}>
-          What's on your mind?
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-800">What's on your mind?</h2>
         <div className="flex space-x-2">
           <button className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300">
             <HiArrowSmLeft className="text-xl" />
@@ -74,7 +80,7 @@ export default function CategorySection() {
             </div>
           ))
         ) : (
-          <p className="text-gray-500">Loading categories...</p>
+          <p className="text-gray-500 text-sm">Loading categories...</p>
         )}
       </div>
     </div>
